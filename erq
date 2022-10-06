@@ -1,0 +1,53 @@
+#!/usr/bin/env node
+const yargs = require('yargs/yargs')
+const { hideBin } = require('yargs/helpers')
+const argv = yargs(hideBin(process.argv)).argv
+const crypto = require('crypto')
+const shell = require('shelljs')
+
+const [command, ...args] = argv._
+
+switch (command) {
+  // erq serve path/to/serve
+  /*
+  case 'serve': {
+    const [target] = args
+    const absoluteTarget = path.resolve(process.cwd(), target)
+    cd(__dirname)
+    $`npx http-server ${absoluteTarget}`
+    break
+  }
+  */
+
+  // erq secret
+  case 'secret': {
+    crypto.randomBytes(64, (err, buffer) => {
+      const secret = buffer.toString('base64')
+      console.log(secret)
+    })
+    break
+  }
+
+  // erq download-video https://www.youtube.com/...
+  /*
+  case 'download-video': {
+    const [url] = args
+    $`youtube-dl -o "~/Downloads/%(title)s.%(ext)s" ${url}`
+    break
+  }
+  */
+
+  case 'kill': {
+    const [port] = args
+    shell.exec(`lsof -n -i4TCP:${port} | grep LISTEN | tr -s ' ' | cut -f 2 -d ' ' | xargs kill -9`)
+    break
+  }
+
+  case undefined: {
+    console.log('please provide a command')
+    break
+  }
+  default: {
+    console.log(`command "${command}" not recognized`)
+  }
+}
