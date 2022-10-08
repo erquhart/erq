@@ -43,10 +43,16 @@ switch (command) {
     break
   }
 
+  case 'timestamp': {
+    console.log(Date.now())
+    break
+  }
+
   case undefined: {
     console.log('please provide a command')
     break
   }
+
   default: {
     console.log(`command "${command}" not recognized`)
   }
