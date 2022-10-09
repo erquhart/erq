@@ -48,6 +48,11 @@ switch (command) {
     break
   }
 
+  case 'ip': {
+    shell.exec('ipconfig getifaddr en0')
+    break
+  }
+
   case undefined: {
     console.log('please provide a command')
     break
