@@ -4,6 +4,7 @@ const { hideBin } = require('yargs/helpers')
 const argv = yargs(hideBin(process.argv)).argv
 const crypto = require('crypto')
 const shell = require('shelljs')
+const { v4: uuid } = require('uuid')
 
 const [command, ...args] = argv._
 
@@ -25,6 +26,12 @@ switch (command) {
       const secret = buffer.toString('base64')
       console.log(secret)
     })
+    break
+  }
+
+  // erq uuid
+  case 'uuid': {
+    console.log(uuid())
     break
   }
 
