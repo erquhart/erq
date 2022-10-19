@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const path = require('path')
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 const argv = yargs(hideBin(process.argv)).argv
@@ -10,15 +11,12 @@ const [command, ...args] = argv._
 
 switch (command) {
   // erq serve path/to/serve
-  /*
   case 'serve': {
     const [target] = args
     const absoluteTarget = path.resolve(process.cwd(), target)
-    cd(__dirname)
-    $`npx http-server ${absoluteTarget}`
+    shell.exec(`npx serve ${absoluteTarget}`)
     break
   }
-  */
 
   // erq secret
   case 'secret': {
@@ -36,13 +34,11 @@ switch (command) {
   }
 
   // erq download-video https://www.youtube.com/...
-  /*
   case 'download-video': {
     const [url] = args
-    $`youtube-dl -o "~/Downloads/%(title)s.%(ext)s" ${url}`
+    shell(`youtube-dl -o "~/Downloads/%(title)s.%(ext)s" ${url}`)
     break
   }
-  */
 
   case 'kill': {
     const [port] = args
