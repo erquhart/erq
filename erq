@@ -7,14 +7,14 @@ const crypto = require('crypto')
 const shell = require('shelljs')
 const { v4: uuid } = require('uuid')
 
-const [command, ...args] = argv._
+const { _: [command, ...args], ...flags } = argv
 
 switch (command) {
   // erq serve path/to/serve
   case 'serve': {
     const [target] = args
     const absoluteTarget = path.resolve(process.cwd(), target)
-    shell.exec(`npx serve ${absoluteTarget}`)
+    shell.exec(`npx serve ${absoluteTarget} -p ${flags.port || 3000}`)
     break
   }
 
