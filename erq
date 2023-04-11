@@ -46,7 +46,7 @@ switch (command) {
     break
   }
 
-  case 'timestamp': {
+  case 'milli': {
     console.log(Date.now())
     break
   }
